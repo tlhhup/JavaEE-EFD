@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniuxy.ssm.mapper.UserMapper">
+	
+	<!-- 通过id查询用户信息 -->
+	<select id="findUserById" parameterType="int" resultType="user">
+		SELECT * from t_user where id=#{value}
+	</select>
+	
+	<!-- 通过姓名进行模糊查询 -->
+	<select id="findUserByCnname" parameterType="string" resultType="user">
+		SELECT * from t_user where cnname LIKE '${value}%'
+	</select>
+	
+	<!-- 添加数据 -->
+	<insert id="insert" parameterType="user">
+		<!-- 执行子查询 -->
+		<selectKey order="AFTER" keyProperty="id" resultType="int">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT into t_user(user_name,cnname,sex,mobile,email) VALUES('${user_name}','${cnname}','${sex}','${mobile}','${email}')
+	</insert>
+
+</mapper>

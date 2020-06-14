@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>servlet</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>helloServlet</servlet-name>
+    <servlet-class>com.woniu.servlet.HelloServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>helloServlet</servlet-name>
+    <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>login</servlet-name>
+    <servlet-class>com.woniu.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>parm</servlet-name>
+    <servlet-class>com.woniu.servlet.ParmServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>parm</servlet-name>
+    <url-pattern>/parm</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>bean</servlet-name>
+    <servlet-class>com.woniu.servlet.BeanServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bean</servlet-name>
+    <url-pattern>/bean</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>jstl</servlet-name>
+    <servlet-class>com.woniu.servlet.JstlServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>jstl</servlet-name>
+    <url-pattern>/jstl</url-pattern>
+  </servlet-mapping>
+  
+  <!-- filter配置，配置结构和servlet配置一样 -->
+  <filter>
+  	<filter-name>first</filter-name>
+  	<filter-class>com.woniu.filter.FirstFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>first</filter-name>
+  	<!-- 这里我们拦截所有的请求  * 表示通配符-->
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>second</filter-name>
+  	<filter-class>com.woniu.filter.SecondFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>second</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+   <filter>
+  	<filter-name>login</filter-name>
+  	<filter-class>com.woniu.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>login</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- 退出登录 -->
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>com.woniu.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
