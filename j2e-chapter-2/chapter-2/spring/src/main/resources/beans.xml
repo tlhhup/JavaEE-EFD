@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		   http://www.springframework.org/schema/context
+	       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		   http://www.springframework.org/schema/aop
+	       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <!--
+        id:bean的唯一标识
+        class:bean的权限丁名
+    -->
+    <bean id="userAction" class="com.woniu.spring.action.UserAction">
+        <!-- 通过set方法注入 -->
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="userService" class="com.woniu.spring.service.UserService"/>
+
+    <context:component-scan base-package="com.woniu.spring.service.impl" />
+
+    <!-- 配置增强 -->
+    <bean id="logger" class="com.woniu.spring.advice.LoggerAdvice"/>
+
+    <!-- 配置aop -->
+    <aop:config>
+        <!-- 切点 -->
+        <aop:pointcut expression="execution(* com.woniu.spring.service.impl.IPayServiceImpl.*(..))" id="pointCut"/>
+
+        <!-- 切面：增强和切点 -->
+        <aop:aspect ref="logger">
+            <aop:after method="after" pointcut-ref="pointCut"/>
+            <aop:before method="before" pointcut-ref="pointCut"/>
+            <aop:around method="around" pointcut-ref="pointCut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

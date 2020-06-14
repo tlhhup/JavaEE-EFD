@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.woniu.mybatis.mapper.StudentMapper">
+
+    <resultMap type="student" id="onebyone">
+        <id column="id" property="id"/>
+        <result column="cnname" property="cnname"/>
+        <result column="sex" property="sex"/>
+        <result column="note" property="note"/>
+        <!--
+        一对一的映射 ：将映射学生证表中的数据,将它转换为Java中IDCard类型的数据
+        property:实体类中的属性名
+        javaType:数据的类型
+        -->
+        <association property="idCard" javaType="idCard">
+            <!-- 映射主键的 -->
+            <id column="tss_id" property="id"/>
+            <result column="native" property="natives"/>
+            <result column="issue_date" property="issue_date"/>
+            <result column="end_date" property="end_date"/>
+            <result column="id" property="student_id"/>
+        </association>
+    </resultMap>
+
+    <select id="findById" parameterType="int" resultMap="onebyone">
+        SELECT
+        ts.*, tss.id AS tss_id,
+        tss.native native,
+        tss.issue_date,
+        tss.end_date
+        FROM
+        t_student ts
+        INNER JOIN t_student_selfcard tss ON ts.id = tss.student_id
+        WHERE
+        ts.id = #{id}
+    </select>
+
+    <resultMap type="student" id="onetoMany">
+        <id column="id" property="id"/>
+        <result column="cnname" property="cnname"/>
+        <result column="sex" property="sex"/>
+        <result column="note" property="note"/>
+        <!-- 多个结果集映射的
+            property:属性的名称
+            ofType:该集合中存在的数据类型
+         -->
+        <collection property="helthInfos" ofType="HelthInfo">
+            <id column="tshId" property="id"/>
+            <result column="id" property="student_id"/>
+            <result column="check_date" property="check_date"/>
+            <result column="heart" property="heart"/>
+            <result column="liver" property="liver"/>
+        </collection>
+    </resultMap>
+
+    <select id="findHealthInfo" resultMap="onetoMany">
+        SELECT
+        ts.*,
+        tsh.id tshId,
+        tsh.check_date,
+        tsh.heart,
+        tsh.liver,
+        tsh.spleen,
+        tsh.lung,
+        tsh.kidney,
+        tsh.prostate,
+        tsh.note as notetsh
+        FROM
+        t_student ts
+        INNER JOIN t_student_health_male tsh
+        on
+        tsh.student_id = ts.id where ts.id=#{id}
+    </select>
+
+
+</mapper>
