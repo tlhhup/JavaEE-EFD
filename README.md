@@ -7,6 +7,9 @@ Java EE 企业级框架开发实战教程源码
 1. clone主仓库
 
 		git clone git@github.com:tlhhup/JavaEE-EFD.git
+2. 进入项目
+
+        cd JavaEE-EFD
 2. 初始化子模块
 
 		git submodule init
