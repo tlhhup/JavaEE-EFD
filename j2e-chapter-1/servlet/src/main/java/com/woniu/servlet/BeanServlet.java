@@ -18,8 +18,19 @@ public class BeanServlet extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+/*		 //获获取session对象传递数据或者使用
+        //request对象传递数据的效果都是一样的,这里主要为读者演示使用session
+        //传递数据的效果及写法
+        HttpSession session = req.getSession();
+        User user = new User();
+        user.setName("张三");
+        user.setAge(20);
+        //将创建的user对象绑定到session对象
+        session.setAttribute("user", user);
+        //转发到el.jsp
+        req.getRequestDispatcher("el.jsp").forward(req, resp);*/
+
 		//tomcat8  自动处理
-		//
 		String uname = req.getParameter("uname");
 		
 		byte[] bytes = uname.getBytes("ISO8859-1");
