@@ -15,6 +15,14 @@ public class HelloServlet extends HttpServlet{
 	 */
 	public void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
+//		//配置UTF-8字符集以支持中文
+//        response.setContentType("text/html;charst=utf-8");
+//        response.setCharacterEncoding("UTF-8");
+//        //获取输出流以输出数据到浏览器中
+//        PrintWriter pw =  response.getWriter();
+//        pw.write("我是Servlet服务端发送给浏览器的数据:Hello Servlet！");
+//        pw.close();
 		response.setContentType("text/html;charst=utf-8");
 		response.setCharacterEncoding("utf-8");
 		String name = "张三";
